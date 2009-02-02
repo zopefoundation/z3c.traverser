@@ -22,10 +22,10 @@ def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
 setup(name='z3c.traverser',
-      version = '0.2.4dev',
+      version = '0.2.4',
       author='Zope Corporation and Contributors',
       author_email='zope-dev@zope.org',
-      description='Pluggable Traverser API',
+      description='Pluggable Traversers And URL handling utilities',
       long_description=(
           read('README.txt')
           + '\n\n' +
