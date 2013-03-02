@@ -39,7 +39,7 @@ TESTS_REQUIRE = [
     'WebTest',
     'zope.app.appsetup',
     'zope.app.publication',
-    'zope.app.wsgi'
+    'zope.app.wsgi',
     'zope.authentication',
     'zope.browserpage',
     'zope.container',
@@ -48,7 +48,7 @@ TESTS_REQUIRE = [
     'zope.security',
     'zope.site',
     'zope.testing',
-    'zope.testrunner'
+    'zope.testrunner',
     ]
 
 setup(name='z3c.traverser',

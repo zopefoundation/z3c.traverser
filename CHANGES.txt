@@ -13,7 +13,7 @@ CHANGES
 - Dropped support for Python 2.4 and 2.5.
 
 - Switched from ``zope.testbrowser`` to ``WebTest`` for browser testing, since
-  test browser is not yet ported.
+  testbrowser is not yet ported.
 
 - Modernized API to use latest packages and component paths.
 
