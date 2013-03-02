@@ -28,7 +28,7 @@ You can then create a viewlet manager using this interface now:
 
 
   >>> from zope.viewlet import viewlet
-  >>> from zope.app.container.contained import Contained
+  >>> from zope.container.contained import Contained
 
   >>> class Content(Contained):
   ...     pass

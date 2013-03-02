@@ -93,11 +93,11 @@ really dislike the Zope 3 traversal namespace notation ``++namespace++`` and
 you can control the names in the container, then the pluggable traverser will
 also provide a viable solution. Let's say we have a container
 
-    >>> from zope.app.container.interfaces import IContainer
+    >>> from zope.container.interfaces import IContainer
     >>> class IMyContainer(IContainer):
     ...     pass
 
-    >>> from zope.app.container.btree import BTreeContainer
+    >>> from zope.container.btree import BTreeContainer
     >>> class MyContainer(BTreeContainer):
     ...     implements(IMyContainer)
     ...     foo = True
@@ -265,13 +265,13 @@ accessible attributes of an object:
 Browser traverser
 -----------------
 
-There's also a special subclass of the PluggableTraverser that 
+There's also a special subclass of the PluggableTraverser that
 implements the ``IBrowserPublisher`` interface, thus providing the
 ``browserDefault`` method that returns a default object and a view
 name to traverse and use if there's no more steps to traverse.
 
 Let's provide a view name registered as an IDefaultView adapter. This
-is usually done by zope.app.publisher's browser:defaultView directive. 
+is usually done by zope.publisher's browser:defaultView directive.
 
     >>> from zope.publisher.interfaces import IDefaultViewName
     >>> provideAdapter('view.html', (IContent, Interface), IDefaultViewName)

@@ -2,7 +2,7 @@
            xmlns:i18n="http://namespaces.zope.org/i18n"
            xmlns:browser="http://namespaces.zope.org/browser"
            i18n_domain="zope">
-  
+
   <view
       for="zope.viewlet.interfaces.IViewlet"
       name="absolute_url"
@@ -58,7 +58,7 @@
       for="zope.publisher.interfaces.browser.IBrowserView"
       factory=".namespace.ViewletManagerHandler"
   />
-  
+
   <view
       name="manager"
       type="zope.interface.Interface"
@@ -72,7 +72,7 @@
       for="zope.viewlet.interfaces.IViewlet"
       factory=".namespace.ViewletViewletManagerHandler"
       />
-  
+
   <view
       name="manager"
       type="zope.interface.Interface"
@@ -85,7 +85,7 @@
       provides="zope.traversing.interfaces.ITraversable" for="*"
       factory=".namespace.ViewletHandler"
       />
-  
+
   <view
       name="viewlet"
       type="zope.interface.Interface"

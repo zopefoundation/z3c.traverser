@@ -4,70 +4,32 @@
            xmlns:zcml="http://namespaces.zope.org/zcml"
            i18n_domain="zope">
 
-  <include
-      zcml:condition="installed zope.app.zcmlfiles"
-      package="zope.app.zcmlfiles"
-      />
-  <include
-      zcml:condition="not-installed zope.app.zcmlfiles"
-      package="zope.app"
-      />
-
-
+  <include package="zope.app.publication" file="meta.zcml" />
+  <include package="zope.browserpage" file="meta.zcml" />
+  <include package="zope.component" file="meta.zcml" />
+  <include package="zope.publisher" file="meta.zcml" />
+  <include package="zope.security" file="meta.zcml" />
   <include package="zope.viewlet" file="meta.zcml"/>
-  <include package="zope.securitypolicy" file="meta.zcml" />
-
-
-  <include package="zope.app.authentication" />
 
   <securityPolicy
-      component="zope.securitypolicy.zopepolicy.ZopeSecurityPolicy" />
+      component="zope.security.simplepolicies.PermissiveSecurityPolicy" />
 
-  <include package="zope.app.securitypolicy" />
-
-  <role id="zope.Anonymous" title="Everybody"
-        description="All users have this role implicitly" />
-
-  <role id="zope.Manager" title="Site Manager" />
-
-
-  <principal
-   id="zope.manager"
-   title="Administrator"
-   login="mgr"
-   password="mgrpw" />
-  <grant
-   role="zope.Manager"
-   principal="zope.manager"
-   />
-
-  <unauthenticatedPrincipal
-    id="zope.anybody"
-    title="Unauthenticated User" />
-
-  <unauthenticatedGroup
-    id="zope.Anybody"
-    title="Unauthenticated Users"
-    />
-
-  <authenticatedGroup
-    id="zope.Authenticated"
-    title="Authenticated Users"
-    />
-
-  <everybodyGroup
-    id="zope.Everybody"
-    title="All Users"
-    />
+  <include package="zope.app.appsetup" />
+  <include package="zope.app.publication" />
+  <include package="zope.authentication" />
+  <include package="zope.container" />
+  <include package="zope.error" />
+  <include package="zope.principalregistry" />
+  <include package="zope.publisher" />
+  <include package="zope.site" />
+  <include package="zope.traversing" />
+  <include package="zope.traversing.browser" />
 
   <include package="zope.contentprovider"/>
   <include package="zope.viewlet"/>
   <include package="z3c.traverser.viewlet"/>
 
-  <grant permission="zope.View"
-         role="zope.Anonymous" />
-
-  <grantAll role="zope.Manager" />
+  <browser:defaultView name="index.html" />
 
   <configure package="z3c.traverser.viewlet.testing">
   <browser:viewlet

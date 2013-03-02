@@ -15,10 +15,7 @@
 
 This implementation is independent of the presentation type. Sub-interfaces
 must be written for every specific presentation type.
-
-$Id$
 """
-__docformat__ = "reStructuredText"
 from zope.publisher.interfaces import IPublishTraverse
 
 

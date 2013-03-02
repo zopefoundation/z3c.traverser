@@ -6,21 +6,22 @@ This is a simple example to demonstrate the usage of this
 package. Please take a look into the testing directory to see how
 things should be set up.
 
-  >>> from zope.testbrowser.testing import Browser
-  >>> browser = Browser()
-  >>> browser.handleErrors = False
-
-  >>> browser.open('http://localhost/@@stackinfo.html')
+  >>> from webtest.app import TestApp
+  >>> browser = TestApp(wsgi_app,
+  ...     extra_environ={'wsgi.handleErrors': False,
+  ...                    'paste.throw_errors': True,
+  ...                    'x-wsgiorg.throw_errors': True})
+  >>> res = browser.get('http://localhost/@@stackinfo.html')
 
 So basically we have no stack info.
 
-  >>> print browser.contents
+  >>> print(res.body)
   Stack Info from object at http://localhost/stackinfo.html:
 
 Let us try to set foo to bar.
 
-  >>> browser.open('http://localhost/kv/foo/bar/@@stackinfo.html')
-  >>> print browser.contents
+  >>> res = browser.get('http://localhost/kv/foo/bar/@@stackinfo.html')
+  >>> print(res.body)
   Stack Info from object at http://localhost/stackinfo.html:
   consumer kv:
   key = u'foo'
@@ -28,8 +29,9 @@ Let us try to set foo to bar.
 
 Two consumers.
 
-  >>> browser.open('http://localhost/kv/foo/bar/kv/time/late/@@stackinfo.html')
-  >>> print browser.contents
+  >>> res = browser.get(
+  ...     'http://localhost/kv/foo/bar/kv/time/late/@@stackinfo.html')
+  >>> print(res.body)
   Stack Info from object at http://localhost/stackinfo.html:
   consumer kv:
   key = u'foo'
@@ -40,7 +42,8 @@ Two consumers.
 
 Invalid url:
 
-  >>> browser.open('http://localhost/kv/foo/bar/kv/@@stackinfo.html')
+  >>> browser.get('http://localhost/kv/foo/bar/kv/@@stackinfo.html') \
+  ...     # doctes: +IGNORE_EXCEPTION_DETAIL
   Traceback (most recent call last):
   ...
   NotFound: Object: <...Folder object at ...>, name: u'kv'

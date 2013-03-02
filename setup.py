@@ -12,8 +12,6 @@
 #
 ##############################################################################
 """Setup for z3c.traverser package
-
-$Id: setup.py 81038 2007-10-24 14:34:17Z srichter $
 """
 import os
 from setuptools import setup, find_packages
@@ -21,6 +19,37 @@ from setuptools import setup, find_packages
 def read(*rnames):
     data = open(os.path.join(os.path.dirname(__file__), *rnames)).read()
     return data + "\n\n"
+
+def alltests():
+    import os
+    import sys
+    import unittest
+    # use the zope.testrunner machinery to find all the
+    # test suites we've put under ourselves
+    import zope.testrunner.find
+    import zope.testrunner.options
+    here = os.path.abspath(os.path.join(os.path.dirname(__file__), 'src'))
+    args = sys.argv[:]
+    defaults = ["--test-path", here]
+    options = zope.testrunner.options.get_options(args, defaults)
+    suites = list(zope.testrunner.find.find_suites(options))
+    return unittest.TestSuite(suites)
+
+TESTS_REQUIRE = [
+    'WebTest',
+    'zope.app.appsetup',
+    'zope.app.publication',
+    'zope.app.wsgi'
+    'zope.authentication',
+    'zope.browserpage',
+    'zope.container',
+    'zope.error',
+    'zope.principalregistry',
+    'zope.security',
+    'zope.site',
+    'zope.testing',
+    'zope.testrunner'
+    ]
 
 setup(name='z3c.traverser',
       version='0.3.1dev',
@@ -55,10 +84,7 @@ setup(name='z3c.traverser',
       package_dir = {'': 'src'},
       namespace_packages=['z3c'],
       extras_require = dict(
-          test = ('zope.app.testing',
-                  'zope.app.securitypolicy',
-                  'zope.app.zcmlfiles',
-                  'zope.testbrowser'),
+          test = TESTS_REQUIRE,
           ),
       install_requires=(
           'setuptools',
@@ -69,6 +95,9 @@ setup(name='z3c.traverser',
           'zope.traversing',
           'zope.viewlet',
           ),
+
+      tests_require=TESTS_REQUIRE,
+      test_suite='__main__.alltests',
       include_package_data = True,
       zip_safe = False,
       )

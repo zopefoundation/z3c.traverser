@@ -12,11 +12,8 @@
 #
 ##############################################################################
 """Pluggable Traverser Implementation
-
-$Id$
 """
-__docformat__ = "reStructuredText"
-from zope.interface import implements
+from zope.interface import implementer
 from zope.component import subscribers, queryAdapter, queryMultiAdapter
 from zope.publisher.interfaces import NotFound
 
@@ -25,8 +22,8 @@ from z3c.traverser import interfaces
 _marker = object()
 
 
+@implementer(interfaces.IPluggableTraverser)
 class BasePluggableTraverser(object):
-    implements(interfaces.IPluggableTraverser)
 
     def __init__(self, context, request):
         self.context = context
@@ -63,9 +60,9 @@ class PluggableTraverser(BasePluggableTraverser):
         raise NotFound(self.context, name, request)
 
 
+@implementer(interfaces.ITraverserPlugin)
 class NameTraverserPlugin(object):
     """Abstract class that traverses an object by name."""
-    implements(interfaces.ITraverserPlugin)
 
     traversalName = None
 
@@ -129,10 +126,9 @@ def AdapterTraverserPlugin(traversalName, interface, adapterName=''):
                  'interface': interface})
 
 
+@implementer(interfaces.ITraverserPlugin)
 class ContainerTraverserPlugin(object):
     """A traverser that knows how to look up objects by name in a container."""
-
-    implements(interfaces.ITraverserPlugin)
 
     def __init__(self, container, request):
         self.context = container
@@ -147,10 +143,9 @@ class ContainerTraverserPlugin(object):
         return subob
 
 
+@implementer(interfaces.ITraverserPlugin)
 class AttributeTraverserPlugin(object):
     """A simple traverser plugin that traverses an attribute by name"""
-
-    implements(interfaces.ITraverserPlugin)
 
     def __init__(self, context, request):
         self.context = context

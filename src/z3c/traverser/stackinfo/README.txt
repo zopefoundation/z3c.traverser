@@ -30,7 +30,7 @@ show this behaviour we define some sample classes.
   >>> class IContent(interface.Interface):
   ...     pass
 
-  >>> from zope.app.folder.folder import Folder
+  >>> from zope.site.folder import Folder
   >>> class Content(Folder):
   ...     interface.implements(IContent)
 

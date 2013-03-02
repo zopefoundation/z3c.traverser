@@ -12,9 +12,9 @@
 #
 ##############################################################################
 """Pluggable Traverser Tests"""
-from zope.component import testing
 import doctest
 import unittest
+from zope.component import testing
 
 
 def test_suite():
