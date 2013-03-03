@@ -5,7 +5,7 @@ CHANGES
 1.0.0a2 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- Added Trove classifiers to specify supported Python versions.
 
 
 1.0.0a1 (2013-03-03)
