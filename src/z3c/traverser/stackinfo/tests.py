@@ -14,6 +14,7 @@
 """Traverser StakcInfo Tests
 """
 import doctest
+import re
 import unittest
 import zope.site.testing
 import zope.traversing.testing
@@ -21,9 +22,18 @@ from zope.app.wsgi.testlayer import BrowserLayer
 from zope.component import provideAdapter
 from zope.interface import Interface
 from zope.publisher.interfaces.http import IHTTPRequest
+from zope.testing import renormalizing
 
 import z3c.traverser.stackinfo
 from z3c.traverser.stackinfo.traversing import UnconsumedURL
+
+checker = renormalizing.RENormalizing([
+    # Python 3 unicode removed the "u".
+    (re.compile("u('.*?')"),
+     r"\1"),
+    (re.compile('u(".*?")'),
+     r"\1"),
+    ])
 
 def setUp(test):
     root = zope.site.testing.siteSetUp(True)
@@ -41,15 +51,17 @@ def setUpBrowser(test):
     test.globs['wsgi_app'] = browser_layer.make_wsgi_app()
 
 def test_suite():
-    flags = doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS
+    flags = doctest.NORMALIZE_WHITESPACE|\
+            doctest.ELLIPSIS|\
+            doctest.IGNORE_EXCEPTION_DETAIL
     suite = unittest.TestSuite((
             doctest.DocFileSuite(
                 'README.txt',
                 setUp=setUp, tearDown=tearDown,
-                optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS),
+                optionflags=flags, checker=checker),
             ))
     browser_suite = doctest.DocFileSuite(
-        'BROWSER.txt', setUp=setUpBrowser, optionflags=flags)
+        'BROWSER.txt', setUp=setUpBrowser, optionflags=flags, checker=checker)
     browser_suite.layer = browser_layer
     suite.addTest(browser_suite)
     return suite

@@ -13,7 +13,7 @@
 ##############################################################################
 """Stack Info Traverser.
 """
-import urllib
+from __future__ import absolute_import
 
 from zope import component
 from zope.proxy import sameProxiedObjects
@@ -21,7 +21,8 @@ from zope.publisher.browser import BrowserView
 from zope.publisher.interfaces import NotFound
 from zope.traversing.browser.absoluteurl import absoluteURL
 
-import interfaces
+from z3c.traverser._compat import quote, unquote
+from . import interfaces
 
 CONSUMERS_ANNOTATION_KEY='z3c.traverser.consumers'
 CONSUMED_ANNOTATION_KEY='z3c.traverser.consumed'
@@ -51,7 +52,7 @@ def getStackConsumers(context, request):
 
 
 def applyStackConsumers(context, request):
-    if not request.annotations.has_key(CONSUMED_ANNOTATION_KEY):
+    if CONSUMED_ANNOTATION_KEY not in request.annotations:
         request.annotations[CONSUMED_ANNOTATION_KEY] = []
         request.annotations[CONSUMERS_ANNOTATION_KEY] = []
     else:
@@ -76,7 +77,7 @@ def applyStackConsumers(context, request):
 
 
 def _encode(v, _safe='@+'):
-    return urllib.quote(v.encode('utf-8'), _safe)
+    return quote(v.encode('utf-8'), _safe)
 
 
 def unconsumedURL(context, request):
@@ -109,7 +110,7 @@ def unconsumedURL(context, request):
 class UnconsumedURL(BrowserView):
 
     def __unicode__(self):
-        return urllib.unquote(self.__str__()).decode('utf-8')
+        return unquote(self.__str__()).decode('utf-8')
 
     def __str__(self):
         return unconsumedURL(self.context, self.request)

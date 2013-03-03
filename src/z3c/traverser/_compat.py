@@ -11,23 +11,16 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
-"""Pluggable Traverser Tests"""
-import doctest
-import unittest
-from zope.component import testing
+"""Python versions compatibility
+"""
+import sys
 
+PY3 = sys.version_info[0] >= 3
 
-def test_suite():
-    flags = doctest.NORMALIZE_WHITESPACE|\
-            doctest.ELLIPSIS|\
-            doctest.IGNORE_EXCEPTION_DETAIL
-    return unittest.TestSuite((
-        doctest.DocFileSuite(
-            'README.txt',
-            setUp=testing.setUp, tearDown=testing.tearDown,
-            optionflags=flags),
-        doctest.DocFileSuite(
-            'namespace.txt',
-            setUp=testing.setUp, tearDown=testing.tearDown,
-            optionflags=flags),
-        ))
+if PY3:
+
+    from urllib.parse import quote, unquote
+
+else:
+
+    from urllib import quote, unquote

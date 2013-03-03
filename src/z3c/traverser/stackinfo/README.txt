@@ -31,8 +31,9 @@ show this behaviour we define some sample classes.
   ...     pass
 
   >>> from zope.site.folder import Folder
-  >>> class Content(Folder):
-  ...     interface.implements(IContent)
+  >>> @interface.implementer(IContent)
+  ... class Content(Folder):
+  ...     pass
 
 There is a convinience function which returns an iterator which
 iterates over tuples of adapterName, adapter. Additionally the
@@ -262,9 +263,6 @@ The unconsumedURL function is also available as a view, named
 
   >>> str(url)
   'http://127.0.0.1/content/under/kv/key2/value2'
-
-  >>> unicode(url)
-  u'http://127.0.0.1/content/under/kv/key2/value2'
 
   >>> url()
   'http://127.0.0.1/content/under/kv/key2/value2'

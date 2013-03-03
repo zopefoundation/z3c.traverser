@@ -76,7 +76,7 @@ class NameTraverserPlugin(object):
         raise NotFound(self.context, name, request)
 
     def _traverse(self, request, name):
-        raise NotImplemented, 'Method must be implemented by subclasses.'
+        raise NotImplemented('Method must be implemented by subclasses.')
 
 
 class NullTraverserPluginTemplate(NameTraverserPlugin):

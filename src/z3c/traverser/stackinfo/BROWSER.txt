@@ -15,13 +15,13 @@ things should be set up.
 
 So basically we have no stack info.
 
-  >>> print(res.body)
+  >>> print(res.body.decode())
   Stack Info from object at http://localhost/stackinfo.html:
 
 Let us try to set foo to bar.
 
   >>> res = browser.get('http://localhost/kv/foo/bar/@@stackinfo.html')
-  >>> print(res.body)
+  >>> print(res.body.decode())
   Stack Info from object at http://localhost/stackinfo.html:
   consumer kv:
   key = u'foo'
@@ -31,7 +31,7 @@ Two consumers.
 
   >>> res = browser.get(
   ...     'http://localhost/kv/foo/bar/kv/time/late/@@stackinfo.html')
-  >>> print(res.body)
+  >>> print(res.body.decode())
   Stack Info from object at http://localhost/stackinfo.html:
   consumer kv:
   key = u'foo'

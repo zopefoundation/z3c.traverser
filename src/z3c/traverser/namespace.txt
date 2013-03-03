@@ -29,7 +29,7 @@ principal is the one that is logged in.
 If we have the wrong principal we get an Unauthorized exception.
 
     >>> ns = namespace.principal(object(), r)
-    >>> ns.traverse('another', None)
+    >>> ns.traverse('another', None) # doctest: +IGNORE_EXCEPTION_DETAIL
     Traceback (most recent call last):
     ...
     Unauthorized: ++principal++another

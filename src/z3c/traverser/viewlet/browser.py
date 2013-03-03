@@ -13,14 +13,14 @@
 ##############################################################################
 """Viewlet Traverser Browser Supprot
 """
-import urllib
-
 import zope.component
 from zope import event
 from zope.contentprovider.interfaces import BeforeUpdateEvent
 from zope.publisher.browser import BrowserView
 from zope.security.proxy import removeSecurityProxy
 from zope.traversing.browser import absoluteurl
+
+from z3c.traverser._compat import quote, unquote
 
 class ViewletAbsoluteURL(absoluteurl.AbsoluteURL):
 
@@ -42,8 +42,7 @@ class ViewletAbsoluteURL(absoluteurl.AbsoluteURL):
             raise TypeError(absoluteurl._insufficientContext)
 
         if name:
-            url += '/' + urllib.quote(name.encode('utf-8'),
-                                      absoluteurl._safe)
+            url += '/' + quote(name.encode('utf-8'), absoluteurl._safe)
 
         return url
 
@@ -70,8 +69,7 @@ class ViewletManagerAbsoluteURL(absoluteurl.AbsoluteURL):
             raise TypeError(absoluteurl._insufficientContext)
 
         if name:
-            url += '/' + urllib.quote(name.encode('utf-8'),
-                                      absoluteurl._safe)
+            url += '/' + quote(name.encode('utf-8'), absoluteurl._safe)
 
         return url
 
@@ -88,5 +86,3 @@ class ViewletView(BrowserView):
         event.notify(BeforeUpdateEvent(self.context, self.request))
         self.context.update()
         return self.context.render()
-    
-        

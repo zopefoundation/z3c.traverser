@@ -17,12 +17,12 @@ implementation.
 
 Let's say that we have an object
 
-    >>> from zope.interface import Interface, implements
+    >>> from zope.interface import Interface, implementer
     >>> class IContent(Interface):
     ...     pass
 
-    >>> class Content(object):
-    ...     implements(IContent)
+    >>> @implementer(IContent)
+    ... class Content(object):
     ...     var = True
 
     >>> content = Content()
@@ -98,8 +98,8 @@ also provide a viable solution. Let's say we have a container
     ...     pass
 
     >>> from zope.container.btree import BTreeContainer
-    >>> class MyContainer(BTreeContainer):
-    ...     implements(IMyContainer)
+    >>> @implementer(IMyContainer)
+    ... class MyContainer(BTreeContainer):
     ...     foo = True
     ...     bar = False
 
@@ -159,8 +159,8 @@ take the following adapter:
     ...     pass
 
     >>> from zope.component import adapts
-    >>> class SomeAdapter(object):
-    ...     implements(ISomeAdapter)
+    >>> @implementer(ISomeAdapter)
+    ... class SomeAdapter(object):
     ...     adapts(IMyContainer)
     ...
     ...     def __init__(self, context):
