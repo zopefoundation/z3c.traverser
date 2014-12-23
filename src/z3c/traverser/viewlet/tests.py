@@ -39,7 +39,7 @@ def setUp(test):
 def tearDown(test):
     zope.site.testing.siteTearDown()
 
-browser_layer = BrowserLayer(z3c.traverser.viewlet, 'ftesting.zcml')
+browser_layer = BrowserLayer(z3c.traverser.viewlet, 'ftesting.zcml', allowTearDown=True)
 
 def setUpBrowser(test):
     test.globs['wsgi_app'] = browser_layer.make_wsgi_app()
