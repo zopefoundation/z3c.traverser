@@ -43,7 +43,7 @@ TESTS_REQUIRE = [
     'WebTest',
     'zope.app.appsetup',
     'zope.app.publication',
-    'zope.app.wsgi',
+    'zope.app.wsgi >= 4.0.0a4',
     'zope.authentication',
     'zope.browserpage',
     'zope.container',
