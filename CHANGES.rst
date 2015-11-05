@@ -110,7 +110,7 @@ CHANGES
 0.1.3 (2007-06-03)
 ------------------
 
-- Added principal namespace, see ``namespace.txt``
+- Added principal namespace, see ``namespace.rst``
 
 - Fire ``BeforeUpdateEvent`` in viewlet view
 

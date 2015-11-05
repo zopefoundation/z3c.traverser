@@ -4,7 +4,7 @@ Traversing Viewlets
 
 This package allows to traverse viewlets and viewletmanagers. It also
 provides absolute url views for those objects which are described in
-this file, for traversers see BROWSER.txt.
+this file, for traversers see BROWSER.rst.
 
   >>> from z3c.traverser.viewlet import browser
 

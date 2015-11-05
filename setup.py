@@ -64,15 +64,15 @@ setup(name='z3c.traverser',
       author_email='zope-dev@zope.org',
       description='Pluggable Traversers And URL handling utilities',
       long_description=(
-          read('README.txt') +
+          read('README.rst') +
           '.. contents::\n\n' +
-          read('CHANGES.txt') +
-          read('src', 'z3c', 'traverser', 'README.txt') +
-          read('src', 'z3c', 'traverser', 'namespace.txt') +
-          read('src', 'z3c', 'traverser', 'viewlet', 'README.txt') +
-          read('src', 'z3c', 'traverser', 'viewlet', 'BROWSER.txt') +
-          read('src', 'z3c', 'traverser', 'stackinfo', 'README.txt') +
-          read('src', 'z3c', 'traverser', 'stackinfo', 'BROWSER.txt')
+          read('CHANGES.rst') +
+          read('src', 'z3c', 'traverser', 'README.rst') +
+          read('src', 'z3c', 'traverser', 'namespace.rst') +
+          read('src', 'z3c', 'traverser', 'viewlet', 'README.rst') +
+          read('src', 'z3c', 'traverser', 'viewlet', 'BROWSER.rst') +
+          read('src', 'z3c', 'traverser', 'stackinfo', 'README.rst') +
+          read('src', 'z3c', 'traverser', 'stackinfo', 'BROWSER.rst')
       ),
       keywords = "zope3 traverser pluggable plugin viewlet",
       classifiers = [

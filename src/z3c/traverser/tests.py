@@ -23,11 +23,11 @@ def test_suite():
             doctest.IGNORE_EXCEPTION_DETAIL
     return unittest.TestSuite((
         doctest.DocFileSuite(
-            'README.txt',
+            'README.rst',
             setUp=testing.setUp, tearDown=testing.tearDown,
             optionflags=flags),
         doctest.DocFileSuite(
-            'namespace.txt',
+            'namespace.rst',
             setUp=testing.setUp, tearDown=testing.tearDown,
             optionflags=flags),
         ))

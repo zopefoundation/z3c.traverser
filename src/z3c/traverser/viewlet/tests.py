@@ -48,12 +48,12 @@ def test_suite():
     flags = doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS
     suite = unittest.TestSuite((
             doctest.DocFileSuite(
-                'README.txt',
+                'README.rst',
                 setUp=setUp, tearDown=tearDown,
                 optionflags=flags),
             ))
     browser_suite = doctest.DocFileSuite(
-        'BROWSER.txt', setUp=setUpBrowser, optionflags=flags)
+        'BROWSER.rst', setUp=setUpBrowser, optionflags=flags)
     browser_suite.layer = browser_layer
     suite.addTest(browser_suite)
     return suite

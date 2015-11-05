@@ -56,12 +56,12 @@ def test_suite():
             doctest.IGNORE_EXCEPTION_DETAIL
     suite = unittest.TestSuite((
             doctest.DocFileSuite(
-                'README.txt',
+                'README.rst',
                 setUp=setUp, tearDown=tearDown,
                 optionflags=flags, checker=checker),
             ))
     browser_suite = doctest.DocFileSuite(
-        'BROWSER.txt', setUp=setUpBrowser, optionflags=flags, checker=checker)
+        'BROWSER.rst', setUp=setUpBrowser, optionflags=flags, checker=checker)
     browser_suite.layer = browser_layer
     suite.addTest(browser_suite)
     return suite
