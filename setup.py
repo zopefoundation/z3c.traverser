@@ -16,9 +16,11 @@
 import os
 from setuptools import setup, find_packages
 
+
 def read(*rnames):
     data = open(os.path.join(os.path.dirname(__file__), *rnames)).read()
     return data + "\n\n"
+
 
 def alltests():
     import os
@@ -54,7 +56,7 @@ TESTS_REQUIRE = [
     'zope.testbrowser',
     'zope.testing',
     'zope.testrunner>=4.3.1',
-    ]
+]
 
 setup(name='z3c.traverser',
       version='1.0.0a3.dev0',
@@ -71,7 +73,7 @@ setup(name='z3c.traverser',
           read('src', 'z3c', 'traverser', 'viewlet', 'BROWSER.txt') +
           read('src', 'z3c', 'traverser', 'stackinfo', 'README.txt') +
           read('src', 'z3c', 'traverser', 'stackinfo', 'BROWSER.txt')
-          ),
+      ),
       keywords = "zope3 traverser pluggable plugin viewlet",
       classifiers = [
           'Development Status :: 5 - Production/Stable',
@@ -95,12 +97,12 @@ setup(name='z3c.traverser',
       package_dir = {'': 'src'},
       namespace_packages=['z3c'],
       extras_require = dict(
-          test = TESTS_REQUIRE,
-          ),
+          test=TESTS_REQUIRE,
+      ),
       setup_requires=[
-        'zope.testrunner>=4.3.1',
-        'eggtestinfo',
-        ],
+          'zope.testrunner>=4.3.1',
+          'eggtestinfo',
+      ],
       install_requires=(
           'setuptools',
           'zope.component',
@@ -110,7 +112,7 @@ setup(name='z3c.traverser',
           'zope.traversing',
           'zope.viewlet',
           'zope.testrunner',
-          ),
+      ),
       tests_require=TESTS_REQUIRE,
       test_suite='__main__.alltests',
       include_package_data = True,
