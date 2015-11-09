@@ -59,7 +59,7 @@ TESTS_REQUIRE = [
 ]
 
 setup(name='z3c.traverser',
-      version='1.0.0a3.dev0',
+      version='1.0.0',
       author='Zope Corporation and Contributors',
       author_email='zope-dev@zope.org',
       description='Pluggable Traversers And URL handling utilities',
