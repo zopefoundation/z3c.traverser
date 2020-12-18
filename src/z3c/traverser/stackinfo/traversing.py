@@ -24,8 +24,9 @@ from zope.traversing.browser.absoluteurl import absoluteURL
 from z3c.traverser._compat import quote, unquote
 from . import interfaces
 
-CONSUMERS_ANNOTATION_KEY='z3c.traverser.consumers'
-CONSUMED_ANNOTATION_KEY='z3c.traverser.consumed'
+CONSUMERS_ANNOTATION_KEY = 'z3c.traverser.consumers'
+CONSUMED_ANNOTATION_KEY = 'z3c.traverser.consumed'
+
 
 def getStackConsumers(context, request):
     """consumes the stack"""
@@ -37,9 +38,9 @@ def getStackConsumers(context, request):
             break
         name = stack[-1]
         consumer = component.queryMultiAdapter(
-                        (context, request),
-                        interface=interfaces.ITraversalStackConsumer,
-                        name=name)
+            (context, request),
+            interface=interfaces.ITraversalStackConsumer,
+            name=name)
         if consumer is None:
             break
         try:
@@ -107,6 +108,7 @@ def unconsumedURL(context, request):
         offset += len(s)
     return url
 
+
 class UnconsumedURL(BrowserView):
 
     def __unicode__(self):
@@ -116,6 +118,7 @@ class UnconsumedURL(BrowserView):
         return unconsumedURL(self.context, self.request)
 
     __call__ = __str__
+
 
 class VHStack(object):
     """Helper class to work around the special case with virtual hosts"""
@@ -147,4 +150,3 @@ class VHStack(object):
             while self.vh:
                 stack.append(self.vh.pop())
             self.request.setTraversalStack(stack)
-

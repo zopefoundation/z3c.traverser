@@ -19,6 +19,7 @@ from zope.security.proxy import removeSecurityProxy
 from zope.traversing.namespace import SimpleHandler
 from zope.viewlet.interfaces import IViewletManager
 
+
 class ViewletViewletManagerHandler(SimpleHandler):
 
     def __init__(self, context, request=None):
@@ -70,4 +71,3 @@ class ViewletHandler(SimpleHandler):
         # method.
         viewlet.browserDefault = lambda r: (viewlet, ('index.html',))
         return viewlet
-

@@ -18,9 +18,6 @@ import sys
 PY3 = sys.version_info[0] >= 3
 
 if PY3:
-
     from urllib.parse import quote, unquote
-
 else:
-
-    from urllib import quote, unquote
+    from urllib import quote, unquote  # noqa: F401 import unused

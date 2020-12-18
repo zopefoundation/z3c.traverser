@@ -21,6 +21,7 @@ from zope.browserpage.viewpagetemplatefile import ViewPageTemplateFile
 class IMyManager(interfaces.IViewletManager):
     """Viewlet manager"""
 
+
 class MyViewlet(object):
 
     def upate(self):

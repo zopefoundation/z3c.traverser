@@ -26,6 +26,7 @@ from zope.traversing.testing import browserView
 
 import z3c.traverser.viewlet
 
+
 def setUp(test):
     root = zope.site.testing.siteSetUp(True)
     zope.traversing.testing.setUp()
@@ -36,22 +37,27 @@ def setUp(test):
     browserView(None, '', AbsoluteURL, providing=IAbsoluteURL)
     browserView(IContainmentRoot, '', SiteAbsoluteURL, providing=IAbsoluteURL)
 
+
 def tearDown(test):
     zope.site.testing.siteTearDown()
 
-browser_layer = BrowserLayer(z3c.traverser.viewlet, 'ftesting.zcml', allowTearDown=True)
+
+browser_layer = BrowserLayer(
+    z3c.traverser.viewlet, 'ftesting.zcml', allowTearDown=True)
+
 
 def setUpBrowser(test):
     test.globs['wsgi_app'] = browser_layer.make_wsgi_app()
 
+
 def test_suite():
-    flags = doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS
+    flags = doctest.NORMALIZE_WHITESPACE | doctest.ELLIPSIS
     suite = unittest.TestSuite((
-            doctest.DocFileSuite(
-                'README.rst',
-                setUp=setUp, tearDown=tearDown,
-                optionflags=flags),
-            ))
+        doctest.DocFileSuite(
+            'README.rst',
+            setUp=setUp, tearDown=tearDown,
+            optionflags=flags),
+    ))
     browser_suite = doctest.DocFileSuite(
         'BROWSER.rst', setUp=setUpBrowser, optionflags=flags)
     browser_suite.layer = browser_layer

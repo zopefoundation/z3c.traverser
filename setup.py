@@ -13,7 +13,7 @@
 ##############################################################################
 """Setup for z3c.traverser package
 """
-import os
+import os.path
 from setuptools import setup, find_packages
 
 
@@ -21,25 +21,6 @@ def read(*rnames):
     data = open(os.path.join(os.path.dirname(__file__), *rnames)).read()
     return data + "\n\n"
 
-
-def alltests():
-    import os
-    import sys
-    import unittest
-    # use the zope.testrunner machinery to find all the
-    # test suites we've put under ourselves
-    import zope.testrunner.find
-    import zope.testrunner.options
-    here = os.path.abspath(os.path.join(os.path.dirname(__file__), 'src'))
-    args = sys.argv[:]
-    defaults = ["--test-path", here]
-    options = zope.testrunner.options.get_options(args, defaults)
-    suites = list(zope.testrunner.find.find_suites(options))
-    # Filter out all tests with layers.
-    import zope.testrunner.eggsupport
-    suites = [zope.testrunner.eggsupport.skipLayers(suite)
-              for suite in suites]
-    return unittest.TestSuite(suites)
 
 TESTS_REQUIRE = [
     'WebTest',
@@ -59,8 +40,8 @@ TESTS_REQUIRE = [
 ]
 
 setup(name='z3c.traverser',
-      version='1.0.1.dev0',
-      author='Zope Corporation and Contributors',
+      version='1.1.0.dev0',
+      author='Zope Foundation and Contributors',
       author_email='zope-dev@zope.org',
       description='Pluggable Traversers And URL handling utilities',
       long_description=(
@@ -74,19 +55,21 @@ setup(name='z3c.traverser',
           read('src', 'z3c', 'traverser', 'stackinfo', 'README.rst') +
           read('src', 'z3c', 'traverser', 'stackinfo', 'BROWSER.rst')
       ),
-      keywords = "zope3 traverser pluggable plugin viewlet",
-      classifiers = [
+      keywords="zope3 traverser pluggable plugin viewlet",
+      classifiers=[
           'Development Status :: 5 - Production/Stable',
           'Environment :: Web Environment',
           'Intended Audience :: Developers',
           'License :: OSI Approved :: Zope Public License',
           'Programming Language :: Python',
           'Programming Language :: Python :: 2',
-          'Programming Language :: Python :: 2.6',
           'Programming Language :: Python :: 2.7',
           'Programming Language :: Python :: 3',
-          'Programming Language :: Python :: 3.3',
-          'Programming Language :: Python :: 3.4',
+          'Programming Language :: Python :: 3.5',
+          'Programming Language :: Python :: 3.6',
+          'Programming Language :: Python :: 3.7',
+          'Programming Language :: Python :: 3.8',
+          'Programming Language :: Python :: 3.9',
           'Programming Language :: Python :: Implementation :: CPython',
           'Natural Language :: English',
           'Operating System :: OS Independent',
@@ -95,15 +78,11 @@ setup(name='z3c.traverser',
       url='http://pypi.python.org/pypi/z3c.traverser',
       license='ZPL 2.1',
       packages=find_packages('src'),
-      package_dir = {'': 'src'},
+      package_dir={'': 'src'},
       namespace_packages=['z3c'],
-      extras_require = dict(
+      extras_require=dict(
           test=TESTS_REQUIRE,
       ),
-      setup_requires=[
-          'zope.testrunner>=4.3.1',
-          'eggtestinfo',
-      ],
       install_requires=(
           'setuptools',
           'zope.component',
@@ -114,8 +93,6 @@ setup(name='z3c.traverser',
           'zope.viewlet',
           'zope.testrunner',
       ),
-      tests_require=TESTS_REQUIRE,
-      test_suite='__main__.alltests',
-      include_package_data = True,
-      zip_safe = False,
+      include_package_data=True,
+      zip_safe=False,
       )

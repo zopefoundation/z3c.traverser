@@ -20,8 +20,8 @@ from zope.publisher.interfaces.browser import IBrowserRequest
 from z3c.traverser.stackinfo.consumer import BaseConsumer
 from z3c.traverser.stackinfo import interfaces
 
+
 @interface.implementer(interfaces.ITraversalStackConsumer)
 @component.adapter(ISite, IBrowserRequest)
 class KeyValueConsumer(BaseConsumer):
-    arguments=('key', 'value')
-
+    arguments = ('key', 'value')

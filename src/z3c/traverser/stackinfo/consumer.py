@@ -18,15 +18,18 @@ from zope.publisher.interfaces.browser import IBrowserRequest
 
 from z3c.traverser.stackinfo import interfaces, traversing
 
+
 @component.adapter(IBrowserRequest)
 @interface.implementer(interfaces.ITraversalStackInfo)
 def requestTraversalStackInfo(request):
     cons = request.annotations.get(traversing.CONSUMERS_ANNOTATION_KEY, [])
     return TraversalStackInfo(cons)
 
+
 @interface.implementer(interfaces.ITraversalStackInfo)
 class TraversalStackInfo(tuple):
     pass
+
 
 @interface.implementer(interfaces.ITraversalStackConsumer)
 class BaseConsumer(object):
@@ -35,8 +38,8 @@ class BaseConsumer(object):
     __name__ = None
 
     def __init__(self, context, request):
-        self.context=context
-        self.request=request
+        self.context = context
+        self.request = request
 
     def consume(self):
         stack = self.request.getTraversalStack()
@@ -52,5 +55,3 @@ class BaseConsumer(object):
     def __repr__(self):
         return '<%s named %r>' % (self.__class__.__name__,
                                   self.__name__)
-
-
