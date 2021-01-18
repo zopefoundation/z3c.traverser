@@ -18,9 +18,9 @@ from zope.component import testing
 
 
 def test_suite():
-    flags = doctest.NORMALIZE_WHITESPACE|\
-            doctest.ELLIPSIS|\
-            doctest.IGNORE_EXCEPTION_DETAIL
+    flags = doctest.NORMALIZE_WHITESPACE |\
+        doctest.ELLIPSIS |\
+        doctest.IGNORE_EXCEPTION_DETAIL
     return unittest.TestSuite((
         doctest.DocFileSuite(
             'README.rst',
@@ -30,4 +30,4 @@ def test_suite():
             'namespace.rst',
             setUp=testing.setUp, tearDown=testing.tearDown,
             optionflags=flags),
-        ))
+    ))

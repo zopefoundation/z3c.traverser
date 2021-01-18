@@ -20,7 +20,8 @@ from zope.publisher.browser import BrowserView
 from zope.security.proxy import removeSecurityProxy
 from zope.traversing.browser import absoluteurl
 
-from z3c.traverser._compat import quote, unquote
+from z3c.traverser._compat import quote
+
 
 class ViewletAbsoluteURL(absoluteurl.AbsoluteURL):
 
@@ -50,8 +51,8 @@ class ViewletAbsoluteURL(absoluteurl.AbsoluteURL):
         name = getattr(context, '__name__', None)
         return u'++viewlet++' + name
 
-
     __call__ = __str__
+
 
 class ViewletManagerAbsoluteURL(absoluteurl.AbsoluteURL):
 
@@ -73,12 +74,12 @@ class ViewletManagerAbsoluteURL(absoluteurl.AbsoluteURL):
 
         return url
 
-
     def _getContextName(self, context):
         name = getattr(context, '__name__', None)
         return u'++manager++' + name
 
     __call__ = __str__
+
 
 class ViewletView(BrowserView):
 

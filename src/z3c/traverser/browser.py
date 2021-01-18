@@ -19,6 +19,7 @@ from zope.publisher.interfaces.browser import IBrowserPublisher
 
 from z3c.traverser.traverser import PluggableTraverser
 
+
 @implementer(IBrowserPublisher)
 class PluggableBrowserTraverser(PluggableTraverser):
 

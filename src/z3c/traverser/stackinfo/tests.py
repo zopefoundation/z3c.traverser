@@ -33,7 +33,8 @@ checker = renormalizing.RENormalizing([
      r"\1"),
     (re.compile('u(".*?")'),
      r"\1"),
-    ])
+])
+
 
 def setUp(test):
     root = zope.site.testing.siteSetUp(True)
@@ -42,24 +43,29 @@ def setUp(test):
     provideAdapter(UnconsumedURL, (Interface, IHTTPRequest), Interface,
                    name='unconsumed_url')
 
+
 def tearDown(test):
     zope.site.testing.siteTearDown()
 
-browser_layer = BrowserLayer(z3c.traverser.stackinfo, 'ftesting.zcml', allowTearDown=True)
+
+browser_layer = BrowserLayer(
+    z3c.traverser.stackinfo, 'ftesting.zcml', allowTearDown=True)
+
 
 def setUpBrowser(test):
     test.globs['wsgi_app'] = browser_layer.make_wsgi_app()
 
+
 def test_suite():
-    flags = doctest.NORMALIZE_WHITESPACE|\
-            doctest.ELLIPSIS|\
-            doctest.IGNORE_EXCEPTION_DETAIL
+    flags = doctest.NORMALIZE_WHITESPACE |\
+        doctest.ELLIPSIS |\
+        doctest.IGNORE_EXCEPTION_DETAIL
     suite = unittest.TestSuite((
-            doctest.DocFileSuite(
-                'README.rst',
-                setUp=setUp, tearDown=tearDown,
-                optionflags=flags, checker=checker),
-            ))
+        doctest.DocFileSuite(
+            'README.rst',
+            setUp=setUp, tearDown=tearDown,
+            optionflags=flags, checker=checker),
+    ))
     browser_suite = doctest.DocFileSuite(
         'BROWSER.rst', setUp=setUpBrowser, optionflags=flags, checker=checker)
     browser_suite.layer = browser_layer
