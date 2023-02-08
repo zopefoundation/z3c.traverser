@@ -34,7 +34,7 @@ class TraversalStackInfo(tuple):
 
 
 @interface.implementer(interfaces.ITraversalStackConsumer)
-class BaseConsumer(object):
+class BaseConsumer:
 
     arguments = ()
     __name__ = None
@@ -55,5 +55,4 @@ class BaseConsumer(object):
         return consumed
 
     def __repr__(self):
-        return '<%s named %r>' % (self.__class__.__name__,
-                                  self.__name__)
+        return f'<{self.__class__.__name__} named {self.__name__!r}>'

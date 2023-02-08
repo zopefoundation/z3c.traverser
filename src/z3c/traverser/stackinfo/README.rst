@@ -45,7 +45,7 @@ traversal stack of the request is consumed if needed.
 
 We set the traversal stack manually for testing here.
 
-  >>> request.setTraversalStack([u'index.html', u'path', u'some'])
+  >>> request.setTraversalStack(['index.html', 'path', 'some'])
   >>> content = Content()
 
 So if no ITraversalStackConsumer adapters are found the stack is left
@@ -54,7 +54,7 @@ untouched.
   >>> list(traversing.getStackConsumers(content, request))
   []
   >>> request.getTraversalStack()
-  [u'index.html', u'path', u'some']
+  ['index.html', 'path', 'some']
 
 There is a base class for consumer implementations which implements
 the ITraversalStackConsumer interface.
@@ -77,31 +77,31 @@ the stack is consumed.
 
   >>> consumers = list(traversing.getStackConsumers(content, request))
   >>> consumers
-  [(u'some', <DummyConsumer named u'some'>)]
+  [('some', <DummyConsumer named 'some'>)]
   >>> request.getTraversalStack()
-  [u'index.html', u'path']
+  ['index.html', 'path']
 
 Each consumer at least has to consume one element, which is always
 the name under which the adapter was registered under.
 
   >>> name, cons = consumers[0]
   >>> cons.__name__
-  u'some'
+  'some'
 
 Let us provide another adapter, to demonstrate that the adpaters
 always have the reverse order of the traversal stack. This is actually
 the order in the url.
 
   >>> component.provideAdapter(DummyConsumer, name='other')
-  >>> stack = [u'index.html', u'path', u'some', u'other']
+  >>> stack = ['index.html', 'path', 'some', 'other']
   >>> request.setTraversalStack(stack)
   >>> consumers = list(traversing.getStackConsumers(content, request))
   >>> consumers
-  [(u'other', <DummyConsumer named u'other'>),
-   (u'some', <DummyConsumer named u'some'>)]
+  [('other', <DummyConsumer named 'other'>),
+   ('some', <DummyConsumer named 'some'>)]
 
   >>> [c.__name__ for name, c in consumers]
-  [u'other', u'some']
+  ['other', 'some']
 
 The arguments attribute of the consumer class defines how many
 arguments are consumed/needed from the stack. Let us create a KeyValue
@@ -110,35 +110,35 @@ consumer, that should extract key value pairs from the stack.
   >>> class KeyValueConsumer(DummyConsumer):
   ...     arguments=('key', 'value')
   >>> component.provideAdapter(KeyValueConsumer, name='kv')
-  >>> stack = [u'index.html', u'value', u'key', u'kv']
+  >>> stack = ['index.html', 'value', 'key', 'kv']
   >>> request.setTraversalStack(stack)
   >>> consumers = list(traversing.getStackConsumers(content, request))
   >>> consumers
-  [(u'kv', <KeyValueConsumer named u'kv'>)]
+  [('kv', <KeyValueConsumer named 'kv'>)]
   >>> request.getTraversalStack()
-  [u'index.html']
+  ['index.html']
   >>> name, cons = consumers[0]
   >>> cons.key
-  u'key'
+  'key'
   >>> cons.value
-  u'value'
+  'value'
 
 We can of course use multiple consumers of the same type.
 
-  >>> stack = [u'index.html', u'v2', u'k2', u'kv', u'v1', u'k1', u'kv']
+  >>> stack = ['index.html', 'v2', 'k2', 'kv', 'v1', 'k1', 'kv']
   >>> request.setTraversalStack(stack)
   >>> consumers = list(traversing.getStackConsumers(content, request))
   >>> [(c.__name__, c.key, c.value) for name, c in consumers]
-  [(u'kv', u'k1', u'v1'), (u'kv', u'k2', u'v2')]
+  [('kv', 'k1', 'v1'), ('kv', 'k2', 'v2')]
 
 If we have too less arguments a NotFound exception.
 
-  >>> stack = [u'k2', u'kv', u'v1', u'k1', u'kv']
+  >>> stack = ['k2', 'kv', 'v1', 'k1', 'kv']
   >>> request.setTraversalStack(stack)
   >>> consumers = list(traversing.getStackConsumers(content, request))
   Traceback (most recent call last):
     ...
-  NotFound: Object: <Content object at ...>, name: u'kv'
+  NotFound: Object: <Content object at ...>, name: 'kv'
 
 
 In order to actually use the stack consumers to retrieve information,
@@ -146,12 +146,12 @@ there is another convinience function which stores the consumers in
 the requests annotations. This should noramlly be called on
 BeforeTraverseEvents.
 
-  >>> stack = [u'index.html', u'v2', u'k2', u'kv', u'v1', u'k1', u'kv']
+  >>> stack = ['index.html', 'v2', 'k2', 'kv', 'v1', 'k1', 'kv']
   >>> request.setTraversalStack(stack)
   >>> traversing.applyStackConsumers(content, request)
   >>> request.annotations[traversing.CONSUMERS_ANNOTATION_KEY]
-  [<KeyValueConsumer named u'kv'>,
-   <KeyValueConsumer named u'kv'>]
+  [<KeyValueConsumer named 'kv'>,
+   <KeyValueConsumer named 'kv'>]
 
 Instead of messing with the annotations one just can adapt the request
 to ITraversalStackInfo.
@@ -159,7 +159,7 @@ to ITraversalStackInfo.
   >>> component.provideAdapter(consumer.requestTraversalStackInfo)
   >>> ti = interfaces.ITraversalStackInfo(request)
   >>> ti
-  (<KeyValueConsumer named u'kv'>, <KeyValueConsumer named u'kv'>)
+  (<KeyValueConsumer named 'kv'>, <KeyValueConsumer named 'kv'>)
 
   >>> len(ti)
   2
@@ -179,14 +179,14 @@ Virtual Host
 If virtual hosts are used the traversal stack contains aditional information
 for the virtual host which will interfere which the stack consumer.
 
-  >>> stack = [u'index.html', u'value', u'key',
-  ...          u'kv', u'++', u'inside vh', '++vh++something']
+  >>> stack = ['index.html', 'value', 'key',
+  ...          'kv', '++', 'inside vh', '++vh++something']
   >>> request.setTraversalStack(stack)
   >>> consumers = list(traversing.getStackConsumers(content, request))
   >>> consumers
-  [(u'kv', <KeyValueConsumer named u'kv'>)]
+  [('kv', <KeyValueConsumer named 'kv'>)]
   >>> request.getTraversalStack()
-  [u'index.html', u'++', u'inside vh', '++vh++something']
+  ['index.html', '++', 'inside vh', '++vh++something']
 
 
 URL Handling
@@ -205,7 +205,7 @@ with the traversal information, which is normally omitted.
   >>> root['content'] = content
   >>> absoluteURL(root['content'], request)
   'http://127.0.0.1/content'
-  >>> stack = [u'index.html', u'v2 space', u'k2', u'kv', u'v1', u'k1', u'kv']
+  >>> stack = ['index.html', 'v2 space', 'k2', 'kv', 'v1', 'k1', 'kv']
   >>> request.setTraversalStack(stack)
   >>> traversing.applyStackConsumers(root['content'], request)
   >>> traversing.unconsumedURL(root['content'], request)
@@ -213,7 +213,7 @@ with the traversal information, which is normally omitted.
 
 Let us have more than one content object
 
-  >>> under = content[u'under'] = Content()
+  >>> under = content['under'] = Content()
   >>> request = TestRequest()
   >>> traversing.unconsumedURL(under, request)
   'http://127.0.0.1/content/under'
@@ -221,7 +221,7 @@ Let us have more than one content object
 We add some consumers to the above object
 
   >>> request = TestRequest()
-  >>> stack = [u'index.html', u'value1', u'key1', u'kv']
+  >>> stack = ['index.html', 'value1', 'key1', 'kv']
   >>> request.setTraversalStack(stack)
   >>> traversing.applyStackConsumers(root['content'], request)
   >>> traversing.unconsumedURL(root['content'], request)
@@ -232,10 +232,10 @@ We add some consumers to the above object
 And now to the object below too.
 
   >>> request = TestRequest()
-  >>> stack = [u'index.html', u'value1', u'key1', u'kv']
+  >>> stack = ['index.html', 'value1', 'key1', 'kv']
   >>> request.setTraversalStack(stack)
   >>> traversing.applyStackConsumers(root['content'], request)
-  >>> stack = [u'index.html', u'value2', u'key2', u'kv']
+  >>> stack = ['index.html', 'value2', 'key2', 'kv']
   >>> request.setTraversalStack(stack)
   >>> traversing.applyStackConsumers(under, request)
   >>> traversing.unconsumedURL(root['content'], request)
@@ -247,7 +247,7 @@ Or only the object below.
 
   >>> request = TestRequest()
   >>> traversing.applyStackConsumers(root['content'], request)
-  >>> stack = [u'index.html', u'value2', u'key2', u'kv']
+  >>> stack = ['index.html', 'value2', 'key2', 'kv']
   >>> request.setTraversalStack(stack)
   >>> traversing.applyStackConsumers(under, request)
   >>> traversing.unconsumedURL(root['content'], request)

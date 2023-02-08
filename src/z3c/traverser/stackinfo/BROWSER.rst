@@ -24,8 +24,8 @@ Let us try to set foo to bar.
   >>> print(res.body.decode())
   Stack Info from object at http://localhost/stackinfo.html:
   consumer kv:
-  key = u'foo'
-  value = u'bar'
+  key = 'foo'
+  value = 'bar'
 
 Two consumers.
 
@@ -34,11 +34,11 @@ Two consumers.
   >>> print(res.body.decode())
   Stack Info from object at http://localhost/stackinfo.html:
   consumer kv:
-  key = u'foo'
-  value = u'bar'
+  key = 'foo'
+  value = 'bar'
   consumer kv:
-  key = u'time'
-  value = u'late'
+  key = 'time'
+  value = 'late'
 
 Invalid url:
 
@@ -46,6 +46,4 @@ Invalid url:
   ...     # doctes: +IGNORE_EXCEPTION_DETAIL
   Traceback (most recent call last):
   ...
-  NotFound: Object: <...Folder object at ...>, name: u'kv'
-
-
+  NotFound: Object: <...Folder object at ...>, name: 'kv'

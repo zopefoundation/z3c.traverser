@@ -44,7 +44,7 @@ TESTS_REQUIRE = [
 setup(name='z3c.traverser',
       version='2.0.dev0',
       author='Zope Foundation and Contributors',
-      author_email='zope-dev@zope.org',
+      author_email='zope-dev@zope.dev',
       description='Pluggable Traversers And URL handling utilities',
       long_description=(
           read('README.rst') +
@@ -76,11 +76,12 @@ setup(name='z3c.traverser',
           'Topic :: Internet :: WWW/HTTP',
           'Framework :: Zope :: 3',
       ],
-      url='http://pypi.python.org/pypi/z3c.traverser',
+      url='https://github.com/zopefoundation/z3c.traverser',
       license='ZPL 2.1',
       packages=find_packages('src'),
       package_dir={'': 'src'},
       namespace_packages=['z3c'],
+      python_requires='>=3.7',
       extras_require=dict(
           test=TESTS_REQUIRE,
       ),

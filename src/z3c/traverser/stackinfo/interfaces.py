@@ -26,12 +26,12 @@ class ITraversalStackConsumer(interface.Interface):
     """A traversal stack consumer"""
 
     __name__ = schema.TextLine(
-        title=u'Name',
-        description=u'The name under which the consumer is registered')
+        title='Name',
+        description='The name under which the consumer is registered')
 
     arguments = schema.Tuple(
-        title=u'Arguments',
-        description=u'The argument names to be consumed')
+        title='Arguments',
+        description='The argument names to be consumed')
 
     def consume():
         """consumes the items from the stack, and sets the __name__
