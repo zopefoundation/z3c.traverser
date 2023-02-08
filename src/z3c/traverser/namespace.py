@@ -13,8 +13,8 @@
 ##############################################################################
 """++principal++ Namespace
 """
-from zope.traversing.namespace import view
 from zope.publisher.interfaces import Unauthorized
+from zope.traversing.namespace import view
 
 
 class principal(view):

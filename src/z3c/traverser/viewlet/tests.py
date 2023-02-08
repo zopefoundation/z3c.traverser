@@ -19,7 +19,8 @@ import unittest
 import zope.site.testing
 import zope.traversing.testing
 from zope.app.wsgi.testlayer import BrowserLayer
-from zope.traversing.browser import AbsoluteURL, SiteAbsoluteURL
+from zope.traversing.browser import AbsoluteURL
+from zope.traversing.browser import SiteAbsoluteURL
 from zope.traversing.browser.interfaces import IAbsoluteURL
 from zope.traversing.interfaces import IContainmentRoot
 from zope.traversing.testing import browserView

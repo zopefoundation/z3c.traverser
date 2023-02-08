@@ -16,6 +16,7 @@
 import doctest
 import re
 import unittest
+
 import zope.site.testing
 import zope.traversing.testing
 from zope.app.wsgi.testlayer import BrowserLayer
@@ -26,6 +27,7 @@ from zope.testing import renormalizing
 
 import z3c.traverser.stackinfo
 from z3c.traverser.stackinfo.traversing import UnconsumedURL
+
 
 checker = renormalizing.RENormalizing([
     # Python 3 unicode removed the "u".

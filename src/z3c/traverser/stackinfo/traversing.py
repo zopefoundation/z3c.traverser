@@ -15,14 +15,17 @@
 """
 from __future__ import absolute_import
 
+from urllib.parse import quote
+from urllib.parse import unquote
+
 from zope import component
 from zope.proxy import sameProxiedObjects
 from zope.publisher.browser import BrowserView
 from zope.publisher.interfaces import NotFound
 from zope.traversing.browser.absoluteurl import absoluteURL
 
-from z3c.traverser._compat import quote, unquote
 from . import interfaces
+
 
 CONSUMERS_ANNOTATION_KEY = 'z3c.traverser.consumers'
 CONSUMED_ANNOTATION_KEY = 'z3c.traverser.consumed'

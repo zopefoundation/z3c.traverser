@@ -13,9 +13,9 @@
 ##############################################################################
 """Sample Application
 """
-from zope.viewlet import interfaces
-from zope.traversing.browser.absoluteurl import absoluteURL
 from zope.browserpage.viewpagetemplatefile import ViewPageTemplateFile
+from zope.traversing.browser.absoluteurl import absoluteURL
+from zope.viewlet import interfaces
 
 
 class IMyManager(interfaces.IViewletManager):

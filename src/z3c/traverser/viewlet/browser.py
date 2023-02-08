@@ -13,14 +13,14 @@
 ##############################################################################
 """Viewlet Traverser Browser Supprot
 """
+from urllib.parse import quote
+
 import zope.component
 from zope import event
 from zope.contentprovider.interfaces import BeforeUpdateEvent
 from zope.publisher.browser import BrowserView
 from zope.security.proxy import removeSecurityProxy
 from zope.traversing.browser import absoluteurl
-
-from z3c.traverser._compat import quote
 
 
 class ViewletAbsoluteURL(absoluteurl.AbsoluteURL):

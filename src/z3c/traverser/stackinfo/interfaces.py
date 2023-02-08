@@ -13,7 +13,8 @@
 ##############################################################################
 """Stackinfo interfaces
 """
-from zope import interface, schema
+from zope import interface
+from zope import schema
 from zope.interface.common.sequence import IExtendedReadSequence
 
 

@@ -13,11 +13,14 @@
 ##############################################################################
 """Pluggable Traverser Implementation
 """
+from zope.component import queryAdapter
+from zope.component import queryMultiAdapter
+from zope.component import subscribers
 from zope.interface import implementer
-from zope.component import subscribers, queryAdapter, queryMultiAdapter
 from zope.publisher.interfaces import NotFound
 
 from z3c.traverser import interfaces
+
 
 _marker = object()
 
