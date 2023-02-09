@@ -13,12 +13,13 @@
 ##############################################################################
 """Testing Consumer
 """
-from zope import interface, component
+from zope import component
+from zope import interface
 from zope.location.interfaces import ISite
 from zope.publisher.interfaces.browser import IBrowserRequest
 
-from z3c.traverser.stackinfo.consumer import BaseConsumer
 from z3c.traverser.stackinfo import interfaces
+from z3c.traverser.stackinfo.consumer import BaseConsumer
 
 
 @interface.implementer(interfaces.ITraversalStackConsumer)

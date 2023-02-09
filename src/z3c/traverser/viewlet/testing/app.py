@@ -13,16 +13,16 @@
 ##############################################################################
 """Sample Application
 """
-from zope.viewlet import interfaces
-from zope.traversing.browser.absoluteurl import absoluteURL
 from zope.browserpage.viewpagetemplatefile import ViewPageTemplateFile
+from zope.traversing.browser.absoluteurl import absoluteURL
+from zope.viewlet import interfaces
 
 
 class IMyManager(interfaces.IViewletManager):
     """Viewlet manager"""
 
 
-class MyViewlet(object):
+class MyViewlet:
 
     def upate(self):
         pass
@@ -44,7 +44,7 @@ class IMostInnerManager(interfaces.IViewletManager):
     """Most inner viewlet manager"""
 
 
-class OuterViewlet(object):
+class OuterViewlet:
 
     template = ViewPageTemplateFile('outer.pt')
 
@@ -55,7 +55,7 @@ class OuterViewlet(object):
         return self.template()
 
 
-class InnerViewlet(object):
+class InnerViewlet:
 
     template = ViewPageTemplateFile('inner.pt')
 
@@ -66,7 +66,7 @@ class InnerViewlet(object):
         return self.template()
 
 
-class MostInnerViewlet(object):
+class MostInnerViewlet:
 
     def upate(self):
         pass

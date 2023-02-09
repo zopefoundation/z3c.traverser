@@ -13,10 +13,12 @@
 ##############################################################################
 """Stack Info Consumer.
 """
-from zope import interface, component
+from zope import component
+from zope import interface
 from zope.publisher.interfaces.browser import IBrowserRequest
 
-from z3c.traverser.stackinfo import interfaces, traversing
+from z3c.traverser.stackinfo import interfaces
+from z3c.traverser.stackinfo import traversing
 
 
 @component.adapter(IBrowserRequest)
@@ -32,7 +34,7 @@ class TraversalStackInfo(tuple):
 
 
 @interface.implementer(interfaces.ITraversalStackConsumer)
-class BaseConsumer(object):
+class BaseConsumer:
 
     arguments = ()
     __name__ = None
@@ -53,5 +55,4 @@ class BaseConsumer(object):
         return consumed
 
     def __repr__(self):
-        return '<%s named %r>' % (self.__class__.__name__,
-                                  self.__name__)
+        return f'<{self.__class__.__name__} named {self.__name__!r}>'

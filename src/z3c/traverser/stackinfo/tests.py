@@ -11,29 +11,20 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
-"""Traverser StakcInfo Tests
+"""Traverser StackInfo Tests
 """
 import doctest
-import re
 import unittest
+
 import zope.site.testing
 import zope.traversing.testing
 from zope.app.wsgi.testlayer import BrowserLayer
 from zope.component import provideAdapter
 from zope.interface import Interface
 from zope.publisher.interfaces.http import IHTTPRequest
-from zope.testing import renormalizing
 
 import z3c.traverser.stackinfo
 from z3c.traverser.stackinfo.traversing import UnconsumedURL
-
-checker = renormalizing.RENormalizing([
-    # Python 3 unicode removed the "u".
-    (re.compile("u('.*?')"),
-     r"\1"),
-    (re.compile('u(".*?")'),
-     r"\1"),
-])
 
 
 def setUp(test):
@@ -64,10 +55,10 @@ def test_suite():
         doctest.DocFileSuite(
             'README.rst',
             setUp=setUp, tearDown=tearDown,
-            optionflags=flags, checker=checker),
+            optionflags=flags),
     ))
     browser_suite = doctest.DocFileSuite(
-        'BROWSER.rst', setUp=setUpBrowser, optionflags=flags, checker=checker)
+        'BROWSER.rst', setUp=setUpBrowser, optionflags=flags)
     browser_suite.layer = browser_layer
     suite.addTest(browser_suite)
     return suite

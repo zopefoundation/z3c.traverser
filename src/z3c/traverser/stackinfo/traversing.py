@@ -13,7 +13,8 @@
 ##############################################################################
 """Stack Info Traverser.
 """
-from __future__ import absolute_import
+
+from urllib.parse import quote
 
 from zope import component
 from zope.proxy import sameProxiedObjects
@@ -21,8 +22,8 @@ from zope.publisher.browser import BrowserView
 from zope.publisher.interfaces import NotFound
 from zope.traversing.browser.absoluteurl import absoluteURL
 
-from z3c.traverser._compat import quote, unquote
 from . import interfaces
+
 
 CONSUMERS_ANNOTATION_KEY = 'z3c.traverser.consumers'
 CONSUMED_ANNOTATION_KEY = 'z3c.traverser.consumed'
@@ -111,16 +112,13 @@ def unconsumedURL(context, request):
 
 class UnconsumedURL(BrowserView):
 
-    def __unicode__(self):
-        return unquote(self.__str__()).decode('utf-8')
-
     def __str__(self):
         return unconsumedURL(self.context, self.request)
 
     __call__ = __str__
 
 
-class VHStack(object):
+class VHStack:
     """Helper class to work around the special case with virtual hosts"""
 
     def __init__(self, request):
